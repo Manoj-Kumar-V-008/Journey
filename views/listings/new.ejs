@@ -8,15 +8,17 @@
 <body>
     <h2>Enter Details : </h2>
     <form method="POST" action="/listings">
-        <input name="title" placeholder="Enter Title"> 
+        <input name="listing[title]" placeholder="Enter Title"> 
         <br><br>
-        <textarea name="description" placeholder="Enter Description"></textarea>
+        <textarea name="listing[description]" placeholder="Enter Description"></textarea>
         <br><br>
-        <input name="price" placeholder="Enter Price" type="number">
+        <input name="listing[image]" placeholder="Enter Image URL/Link" type="text">
         <br><br>
-        <input name="location" placeholder="Enter Location">
+        <input name="listing[price]" placeholder="Enter Price" type="number">
         <br><br>
-        <input name="country" placeholder="Enter Country">
+        <input name="listing[location]" placeholder="Enter Location">
+        <br><br>
+        <input name="listing[country]" placeholder="Enter Country">
         <br><br>
         <button>Submit</button>
     </form>
