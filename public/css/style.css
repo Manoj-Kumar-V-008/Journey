@@ -81,3 +81,13 @@ body{
     opacity: 0.18;
     background-color: whitesmoke;
 }
+
+.sub-btn{
+    color:#20D4FF; ;
+    border: 2px solid #20D4FF;;
+}
+
+.sub-btn:hover{
+    background-color:#20D4FF; ;
+    border: none;
+}
