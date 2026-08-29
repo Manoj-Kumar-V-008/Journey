@@ -45,7 +45,7 @@ body{
 }
 
 .container{
-    padding-top: 2.5    rem;
+    padding-top: 2.5 rem;
     padding-bottom: 2rem;
 }
 
@@ -89,5 +89,15 @@ body{
 
 .sub-btn:hover{
     background-color:#20D4FF; ;
+    border: none;
+}
+
+.upd-btn{
+    color:#F97316; ;
+    border: 2px solid #F97316;;
+}
+
+.sub-btn:hover{
+    background-color:#F97316 !important ;
     border: none;
 }
