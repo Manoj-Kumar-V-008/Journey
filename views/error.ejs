@@ -1,0 +1,77 @@
+<% layout("/layouts/boilerplate") %>
+
+<div class="container py-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8 col-lg-6">
+
+            <div class="card border-0 shadow-sm rounded-4 overflow-hidden">
+                
+                <!-- Top accent -->
+                <div style="height: 6px; background-color: #20D4FF;"></div>
+
+                <div class="card-body text-center p-5">
+
+                    <!-- Error Icon -->
+                    <div class="d-flex justify-content-center mb-4">
+                        <div
+                            class="d-flex align-items-center justify-content-center rounded-circle"
+                            style="
+                                width: 80px;
+                                height: 80px;
+                                background-color: #FFF7ED;
+                            "
+                        >
+                            <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                width="42"
+                                height="42"
+                                fill="#F97316"
+                                viewBox="0 0 16 16"
+                            >
+                                <path d="M8.982 1.566a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566zM8 5c.535 0 .954.462.9.995l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 5.995A.905.905 0 0 1 8 5zm.002 6a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"/>
+                            </svg>
+                        </div>
+                    </div>
+
+                    <!-- Heading -->
+                    <h2 class="fw-bold mb-2" style="color: #0F172A;">
+                        Oops! Something went wrong.
+                    </h2>
+
+                    <!-- Message -->
+                    <p class="text-secondary mb-4">
+                        We couldn't complete your request right now. <br>
+                        Reason : <%=message%>
+                    </p>
+
+                    <!-- Buttons -->
+                    <div class="d-flex justify-content-center gap-2 flex-wrap">
+
+                        <a
+                            href="/listings"
+                            class="btn rounded-pill px-4 py-2 fw-semibold text-white"
+                            style="background-color: #20D4FF; border: none;"
+                        >
+                            Explore Journey
+                        </a>
+
+                        <button
+                            onclick="history.back()"
+                            class="btn rounded-pill px-4 py-2 fw-semibold"
+                            style="
+                                color: #F97316;
+                                border: 1px solid #F97316;
+                                background-color: white;
+                            "
+                        >
+                            Go Back
+                        </button>
+
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
