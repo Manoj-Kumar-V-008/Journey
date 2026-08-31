@@ -4,15 +4,17 @@
         <div class="row">
             <div class="col-md-8 offset-md-2">
                 <h2 class="mb-4 fw-bold">Enter Details</h2>
-                <form method="POST" action="/listings">
+                <form method="POST" action="/listings" novalidate class="needs-validation">
                     <div class="mb-3">
                         <label for="title" class="form-label fw-semibold">Title</label>
                         <input id="title" name="listing[title]" placeholder="Enter Title" class="form-control" required>
+                        <div class="invalid-feedback">Please give a valid Title</div>
                     </div>
 
                     <div class="mb-3">
                         <label for="description" class="form-label fw-semibold  ">Description</label>
                         <textarea id="description" name="listing[description]" placeholder="Enter Description" class="form-control" rows="4" required></textarea>
+                        <div class="invalid-feedback">Please give a valid Description</div>
                     </div>
 
                     <div class="mb-3">
@@ -26,15 +28,18 @@
                             <div class="input-group">
                                 <span class="input-group-text">₹</span>
                                 <input id="price" name="listing[price]" placeholder="Enter Price" type="number" class="form-control" required>
+                                <div class="invalid-feedback">Please enter Price</div>
                             </div>
                         </div>
                         <div class="col-md-4 mb-3">
                             <label for="location" class="form-label fw-semibold">Location</label>
                             <input id="location" name="listing[location]" placeholder="Enter Location" class="form-control" required>
+                            <div class="invalid-feedback">Please enter Location</div>
                         </div>
                         <div class="col-md-4 mb-3">
                             <label for="country" class="form-label fw-semibold">Country</label>
                             <input id="country" name="listing[country]" placeholder="Enter Country" class="form-control" required>
+                            <div class="invalid-feedback">Please enter Country name</div>
                         </div>
                     </div>
 
