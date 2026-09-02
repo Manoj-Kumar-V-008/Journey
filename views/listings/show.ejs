@@ -3,12 +3,11 @@
     <div class="container mt-4 mb-5">
         <div class="row">
             <div class="col-md-8 offset-md-2">
-                <h3 class="mb-4">Listing Details</h3>
+                <h3 class="mb-4"><%=listings.title%></h3>
 
                 <div class="card shadow-sm">
                     <img src="<%=listings.image.url%>" class="card-img-top" alt="<%=listings.title%>" style="height: 400px; object-fit: cover;">
                     <div class="card-body">
-                        <h4 class="card-title"><%=listings.title%></h4>
                         <p class="card-text text-muted"><%=listings.description%></p>
 
                         <ul class="list-group list-group-flush mb-3">
@@ -35,4 +34,48 @@
             </div>
         </div>
     </div>
+    
+    <div class="col-md-8 offset-md-2 mt-4">
+    <div class="card shadow-sm review-card">
+        <div class="card-body p-4">
+            <h4 class="mb-4 review-title">Leave a Review</h4>
+
+            <form action="/listings/<%=listings._id%>/reviews" method="POST">
+                <div class="mb-4">
+                    <label for="rating" class="form-label d-flex justify-content-between align-items-center">
+                        <span><b>Rating</b></span>
+                        <span id="ratingValue" class="badge rating-badge">
+                            <i class="fa-solid fa-star"></i> 3
+                        </span>
+                    </label>
+                    
+                    <input
+                        type="range"
+                        class="form-range"
+                        min="1"
+                        max="5"
+                        id="rating"
+                        name="review[rating]"
+                        value="3"
+                        oninput="document.getElementById('ratingValue').innerHTML = '<i class=\'fa-solid fa-star\'></i> ' + this.value"
+                    >
+                </div>
+
+                <div class="mb-4">
+                    <label for="comment" class="form-label">Comments</label>
+                    <textarea
+                        class="form-control custom-textarea"
+                        name="review[comment]"
+                        id="comment"
+                        rows="4"
+                        placeholder="Share your experience..."
+                        required
+                    ></textarea>
+                </div>
+
+                <button type="submit" class="btn sub-btn">Submit</button>
+            </form>
+        </div>
+    </div>
+</div>
 </body>
