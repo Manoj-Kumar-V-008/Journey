@@ -40,7 +40,7 @@
         <div class="card-body p-4">
             <h4 class="mb-4 review-title">Leave a Review</h4>
 
-            <form action="/listings/<%=listings._id%>/reviews" method="POST">
+            <form action="/listings/<%=listings._id%>/reviews" method="POST" novalidate class="needs-validation">
                 <div class="mb-4">
                     <label for="rating" class="form-label d-flex justify-content-between align-items-center">
                         <span><b>Rating</b></span>
@@ -62,7 +62,7 @@
                 </div>
 
                 <div class="mb-4">
-                    <label for="comment" class="form-label">Comments</label>
+                    <label for="comment" class="form-label ">Comments</label>
                     <textarea
                         class="form-control custom-textarea"
                         name="review[comment]"
@@ -71,6 +71,8 @@
                         placeholder="Share your experience..."
                         required
                     ></textarea>
+
+                    <div class="invalid-feedback">Please submit some comment about your experience</div>
                 </div>
 
                 <button type="submit" class="btn sub-btn">Submit</button>
