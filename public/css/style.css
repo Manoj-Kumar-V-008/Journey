@@ -133,3 +133,26 @@ body{
     margin-right: 3px;
     font-size: 0.8rem;
 }
+
+.review-display-card {
+    border: 1px solid #e2e8f0 !important;
+    border-radius: 0.75rem;
+    transition: box-shadow 0.2s ease;
+}
+
+.review-display-card:hover {
+    box-shadow: 0 0.25rem 0.75rem rgba(0, 0, 0, 0.06);
+}
+
+.delete-review-btn {
+    color: #94a3b8;
+    border: 1px solid #94a3b8;
+    background: transparent;
+    font-size: 0.8rem;
+}
+
+.delete-review-btn:hover {
+    color: #fff;
+    background-color: #ef4444;
+    border-color: #ef4444;
+}

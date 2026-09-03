@@ -80,4 +80,36 @@
         </div>
     </div>
 </div>
+
+            <hr>
+
+            <div class="col-md-8 offset-md-2 mt-5">
+    <h4 class="review-title mb-4">
+        All Reviews <span class="text-muted fw-normal">(<%= listings.reviews.length %>)</span>
+    </h4>
+
+    <% if (listings.reviews.length === 0) { %>
+        <p class="card-text">No reviews yet — be the first to share your experience!</p>
+    <% } else { %>
+        <div class="row">
+            <% for (let review of listings.reviews) { %>
+                <div class="col-md-6 mb-4">
+                    <div class="card review-display-card h-100">
+                        <div class="card-body">
+                            <h5 class="card-title">User</h5>
+                            <span class="badge rating-badge mb-2">
+                                <i class="fa-solid fa-star"></i> <%= review.rating %>
+                            </span>
+                            <p class="card-text mb-2"><%= review.comment %></p>
+
+                            <form action="/listings/<%= listings._id %>/reviews/<%= review._id %>?_method=DELETE" method="POST">
+                                <button type="submit" class="btn btn-sm delete-review-btn">Delete</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            <% } %>
+        </div>
+    <% } %>
+</div>
 </body>
