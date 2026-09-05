@@ -1,3 +1,4 @@
+<!-- Flash message in case of Success -->
 <% if (success && success.length) { %>
     <div class="journey-toast toast-success alert alert-dismissible fade show" role="alert" id="flashToast">
         <i class="fa-solid fa-circle-check toast-icon"></i>
@@ -6,14 +7,11 @@
     </div>
 <% } %>
 
-
-
-<!-- <script>
-    // auto-dismiss after 4 seconds
-    const flashToast = document.getElementById("flashToast");
-    if (flashToast) {
-        setTimeout(() => {
-            bootstrap.Alert.getOrCreateInstance(flashToast).close();
-        }, 4000);
-    }
-</script> -->
+<!-- Flash message in case of error -->
+<% if (error && error.length) { %>
+    <div class="journey-toast toast-error alert alert-dismissible fade show" role="alert" id="flashToast">
+        <i class="fa-solid fa-circle-exclamation toast-icon"></i>
+        <span><%= error %></span>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+<% } %>
