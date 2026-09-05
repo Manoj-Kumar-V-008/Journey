@@ -17,3 +17,12 @@
     }, false)
   })
 })();
+
+
+// auto-dismiss after 4 seconds
+  const flashToast = document.getElementById("flashToast");
+  if (flashToast) {
+      setTimeout(() => {
+          bootstrap.Alert.getOrCreateInstance(flashToast).close();
+      }, 4000);
+  }

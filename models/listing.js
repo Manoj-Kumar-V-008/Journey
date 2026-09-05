@@ -17,8 +17,8 @@ const listingSchema = new schema({
     },
     url:{
         type: String,
-        default: "https://share.google/avW3iF2unmAydEbyF", // a real fallback image
-        set: (v) => v === "" ? "https://share.google/avW3iF2unmAydEbyF" : v,
+        default: "https://placehold.net/main.svg", // a real fallback image
+        set: (v) => v === "" ? "https://placehold.net/main.svg" : v,
     },
 },
     price:{

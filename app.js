@@ -6,6 +6,7 @@ const methodOverride = require("method-override")
 const ejsMate = require("ejs-mate");
 const ExpressError = require("./utils/ExpressError.js");
 const session = require("express-session");
+const flash = require("connect-flash");
 
 //using express router
 const listings = require("./routes/listings.js");
@@ -31,6 +32,7 @@ const sessionOption = {
 };
 
 app.use(session(sessionOption));
+app.use(flash());//use before routes
 
 app.get("/",(req,res)=>{
     res.send("Server is working");
@@ -47,6 +49,13 @@ main()
         console.log("connection Successful");
     })
     .catch(err => console.log(err));
+
+
+//using flash for create route
+app.use((req,res,next)=>{
+    res.locals.success=req.flash("success");
+    next();
+});
 
 //for routing from '/routes/listings.js'
 app.use("/listings",listings)

@@ -1,0 +1,19 @@
+<% if (success && success.length) { %>
+    <div class="journey-toast toast-success alert alert-dismissible fade show" role="alert" id="flashToast">
+        <i class="fa-solid fa-circle-check toast-icon"></i>
+        <span><%= success %></span>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+<% } %>
+
+
+
+<!-- <script>
+    // auto-dismiss after 4 seconds
+    const flashToast = document.getElementById("flashToast");
+    if (flashToast) {
+        setTimeout(() => {
+            bootstrap.Alert.getOrCreateInstance(flashToast).close();
+        }, 4000);
+    }
+</script> -->
