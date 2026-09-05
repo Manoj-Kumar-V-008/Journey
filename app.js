@@ -22,7 +22,12 @@ app.use(express.static(path.join(__dirname,"/public")));
 const sessionOption = {
     secret : "thisisaSecretCode",
     resave:false,
-    saveUninitialized:true
+    saveUninitialized:true,
+    cookie:{
+        expires:Date.now()+7*24*60*60*1000,//days*hrs*min*sec*millisec
+        maxAge:7*24*60*60*1000,
+        httpOnly:true
+    }
 };
 
 app.use(session(sessionOption));
