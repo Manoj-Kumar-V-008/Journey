@@ -7,6 +7,9 @@ const ejsMate = require("ejs-mate");
 const ExpressError = require("./utils/ExpressError.js");
 const session = require("express-session");
 const flash = require("connect-flash");
+const passport = require("passport");
+const LocalStrategy = require("passport-local");
+const User = require("./models/user.js");
 
 //using express router
 const listings = require("./routes/listings.js");
@@ -33,6 +36,16 @@ const sessionOption = {
 
 app.use(session(sessionOption));
 app.use(flash());//use before routes
+
+//Implementing passport for Authentication
+app.use(passport.initialize());
+app.use(passport.session());
+passport.use(new LocalStrategy(User.authenticate()));
+
+// use static serialize(to serialize users into the session) and
+//  deserialize(to deserialize users into the session) of model for passport session support
+passport.serializeUser(User.serializeUser());
+passport.deserializeUser(User.deserializeUser());
 
 app.get("/",(req,res)=>{
     res.send("Server is working");
