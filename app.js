@@ -10,6 +10,7 @@ const flash = require("connect-flash");
 const passport = require("passport");
 const LocalStrategy = require("passport-local");
 const User = require("./models/user.js");
+const wrapAsync = require("./utils/wrapAsync.js");
 
 //using express router
 const listings = require("./routes/listings.js");
@@ -37,6 +38,14 @@ const sessionOption = {
 app.use(session(sessionOption));
 app.use(flash());//use before routes
 
+//using flash for create route
+app.use((req,res,next)=>{
+    res.locals.success=req.flash("success");
+    res.locals.error=req.flash("error");
+    next();
+});
+
+
 //Implementing passport for Authentication
 app.use(passport.initialize());
 app.use(passport.session());
@@ -48,14 +57,14 @@ passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
 
 //Adding Demo User
-app.get("/demouser",async (req,res)=>{
+app.get("/demouser",wrapAsync(async (req,res)=>{
     let fakeUser = new User({
         username:"Fake-User",
         email:"fakeuser@gmail.com"
     });
     let registeredUser = await User.register(fakeUser,"password");
     res.send(registeredUser); 
-});
+}));
 
 app.get("/",(req,res)=>{
     res.send("Server is working");
@@ -74,12 +83,6 @@ main()
     .catch(err => console.log(err));
 
 
-//using flash for create route
-app.use((req,res,next)=>{
-    res.locals.success=req.flash("success");
-    res.locals.error=req.flash("error");
-    next();
-});
 
 //for routing from '/routes/listings.js'
 app.use("/listings",listings)
