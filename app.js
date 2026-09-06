@@ -47,6 +47,16 @@ passport.use(new LocalStrategy(User.authenticate()));
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
 
+//Adding Demo User
+app.get("/demouser",async (req,res)=>{
+    let fakeUser = new User({
+        username:"Fake-User",
+        email:"fakeuser@gmail.com"
+    });
+    let registeredUser = await User.register(fakeUser,"password");
+    res.send(registeredUser); 
+});
+
 app.get("/",(req,res)=>{
     res.send("Server is working");
 });
