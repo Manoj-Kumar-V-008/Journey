@@ -13,8 +13,9 @@ const User = require("./models/user.js");
 const wrapAsync = require("./utils/wrapAsync.js");
 
 //using express router
-const listings = require("./routes/listings.js");
-const reviews = require("./routes/reviews.js");
+const listingsRouter = require("./routes/listings.js");
+const reviewsRouter = require("./routes/reviews.js");
+const userRouter=require("./routes/user.js");
 
 
 app.set("view engine", "ejs");
@@ -56,15 +57,15 @@ passport.use(new LocalStrategy(User.authenticate()));
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
 
-//Adding Demo User
-app.get("/demouser",wrapAsync(async (req,res)=>{
-    let fakeUser = new User({
-        username:"Fake-User",
-        email:"fakeuser@gmail.com"
-    });
-    let registeredUser = await User.register(fakeUser,"password");
-    res.send(registeredUser); 
-}));
+// //Adding Demo User
+// app.get("/demouser",wrapAsync(async (req,res)=>{
+//     let fakeUser = new User({
+//         username:"Fake-User",
+//         email:"fakeuser@gmail.com"
+//     });
+//     let registeredUser = await User.register(fakeUser,"password");
+//     res.send(registeredUser); 
+// }));
 
 app.get("/",(req,res)=>{
     res.send("Server is working");
@@ -85,9 +86,11 @@ main()
 
 
 //for routing from '/routes/listings.js'
-app.use("/listings",listings)
+app.use("/listings",listingsRouter)
 
-app.use("/listings/:id/reviews",reviews);
+app.use("/listings/:id/reviews",reviewsRouter);
+
+app.use("/",userRouter);
 
 //if user tries to access undefined route 
 app.all("/*splat",(req,res,next)=>{

@@ -1,0 +1,35 @@
+<% layout("/layouts/boilerplate") %>
+
+<div class="signup-wrapper">
+    <div class="signup-card">
+        <div class="text-center mb-4">
+            <i class="fa-solid fa-person-walking-luggage signup-icon"></i>
+            <h3 class="signup-title mt-2">Create your Journey account</h3>
+            <p class="signup-subtitle">Sign up to start exploring and hosting listings</p>
+        </div>
+
+        <form action="/signup" method="POST" novalidate class="needs-validation">
+            <div class="mb-3">
+                <label for="username" class="form-label">Username</label>
+                <input type="text" class="form-control signup-input" id="username" name="username" placeholder="Choose a username" required>
+                <div class="valid-feedback">Looks Good</div>
+            </div>
+
+            <div class="mb-3">
+                <label for="email" class="form-label">Email</label>
+                <input type="email" class="form-control signup-input" id="email" name="email" placeholder="you@example.com" required>
+            </div>
+
+            <div class="mb-4">
+                <label for="password" class="form-label">Password</label>
+                <input type="password" class="form-control signup-input" id="password" name="password" placeholder="Create a password" required>
+            </div>
+
+            <button type="submit" class="btn signup-btn w-100">Sign Up</button>
+        </form>
+
+        <p class="text-center mt-4 signup-footer-text">
+            Already have an account? <a href="/login" class="signup-link">Log in</a>
+        </p>
+    </div>
+</div>
