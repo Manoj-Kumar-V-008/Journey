@@ -272,3 +272,77 @@ body{
 .signup-link:hover {
     text-decoration: underline;
 }
+
+.login-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 3rem 1rem;
+}
+
+.login-card {
+    background-color: #fff;
+    border-radius: 1rem;
+    border-top: 4px solid #20D4FF;
+    box-shadow: 0 0.5rem 1.5rem rgba(0, 0, 0, 0.06);
+    padding: 2.5rem 2rem;
+    width: 100%;
+    max-width: 420px;
+}
+
+.login-icon {
+    color: #20D4FF;
+    font-size: 2.2rem;
+}
+
+.login-title {
+    color: #1E293B;
+    font-weight: 700;
+    font-size: 1.4rem;
+}
+
+.login-subtitle {
+    color: #475569;
+    font-size: 0.9rem;
+}
+
+.login-input {
+    border-radius: 0.5rem;
+    border: 1px solid #cbd5e1;
+    padding: 0.6rem 0.85rem;
+}
+
+.login-input:focus {
+    border-color: #20D4FF;
+    box-shadow: 0 0 0 0.2rem rgba(32, 212, 255, 0.25);
+}
+
+.login-btn {
+    background-color: #F97316;
+    color: #fff;
+    font-weight: 600;
+    border-radius: 0.5rem;
+    padding: 0.65rem;
+    border: none;
+    transition: background-color 0.2s ease;
+}
+
+.login-btn:hover {
+    background-color: #d9640f;
+    color: #fff;
+}
+
+.login-footer-text {
+    color: #475569;
+    font-size: 0.9rem;
+}
+
+.login-link {
+    color: #20D4FF;
+    font-weight: 600;
+    text-decoration: none;
+}
+
+.login-link:hover {
+    text-decoration: underline;
+}   

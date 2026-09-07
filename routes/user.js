@@ -2,6 +2,8 @@ const express = require("express");
 const router = express.Router();//{ mergeParams: true } helps use :id from parent(app.js) in req.params.id
 const User = require("../models/user.js");
 const wrapAsync = require("../utils/wrapAsync.js");
+const passport = require("passport");
+
 
 router.get("/signup",(req,res)=>{
     res.render("users/signup.ejs");
@@ -20,5 +22,14 @@ router.post("/signup", wrapAsync(async(req,res)=>{
     }
 }));
 
+router.get("/login",wrapAsync(async(req,res)=>{
+    res.render("users/login.ejs");
+}));
+
+// passport is used as middleware for authentication during login
+router.post("/login",passport.authenticate('local',{failureRedirect:"/login" , failureFlash:true}),wrapAsync(async(req,res)=>{
+    req.flash("success",`Logged in Successfully`);
+    res.redirect("/listings");
+}));
 
 module.exports=router;
