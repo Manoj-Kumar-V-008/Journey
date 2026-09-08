@@ -32,4 +32,16 @@ router.post("/login",passport.authenticate('local',{failureRedirect:"/login" , f
     res.redirect("/listings");
 }));
 
+
+//implementing logout,logout() is builtin by passport
+router.get("/logout",(req,res,next)=>{
+    req.logout((err)=>{
+        if(err){
+            next(err);
+        }
+        req.flash("success","You logged out");
+        res.redirect("/listings");
+    })
+});
+
 module.exports=router;
