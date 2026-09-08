@@ -3,6 +3,7 @@ const router = express.Router();//{ mergeParams: true } helps use :id from paren
 const User = require("../models/user.js");
 const wrapAsync = require("../utils/wrapAsync.js");
 const passport = require("passport");
+const { saveRedirectUrl } = require("../middleware.js");
 
 
 router.get("/signup",(req,res)=>{
@@ -19,7 +20,7 @@ router.post("/signup", wrapAsync(async(req,res)=>{
                 return next(err);
             }
             req.flash("success",`${username} registered successfully`);
-            res.redirect("/listings");
+            res.redirect(req.session.redirectUrl);
         });
     }catch(e){
         req.flash("error",e.message);
@@ -32,9 +33,12 @@ router.get("/login",wrapAsync(async(req,res)=>{
 }));
 
 // passport is used as middleware for authentication during login
-router.post("/login",passport.authenticate('local',{failureRedirect:"/login" , failureFlash:true}),wrapAsync(async(req,res)=>{
-    req.flash("success",`Logged in Successfully`);
-    res.redirect("/listings");
+router.post("/login",saveRedirectUrl,passport.authenticate('local',{failureRedirect:"/login" , failureFlash:true}),
+    wrapAsync(async(req,res)=>{
+        req.flash("success",`Logged in Successfully`);
+//req.session.redirectUrl is reset by passport so we should use locals which can be accessed everywhere & passport can't change it
+        let redirectUrl = res.locals.redirectUrl || "/listings";
+        res.redirect(redirectUrl);
 }));
 
 
