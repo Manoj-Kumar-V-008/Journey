@@ -14,8 +14,13 @@ router.post("/signup", wrapAsync(async(req,res)=>{
         let {username,email,password} = req.body;
         const newUser = new User({email,username});
         const regesterdUser = await User.register(newUser,password);
-        req.flash("success",`${username} registered successfully`);
-        res.redirect("/listings");
+        req.login(regesterdUser,(err)=>{
+            if(err){
+                return next(err);
+            }
+            req.flash("success",`${username} registered successfully`);
+            res.redirect("/listings");
+        });
     }catch(e){
         req.flash("error",e.message);
         res.redirect("/signup");

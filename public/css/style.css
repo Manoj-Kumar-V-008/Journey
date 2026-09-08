@@ -75,6 +75,8 @@ body{
 
 .listing-link{
     text-decoration: none;
+    color: inherit;
+    display: block;
 }
 
 .card-img-overlay:hover{
