@@ -39,18 +39,19 @@ const sessionOption = {
 app.use(session(sessionOption));
 app.use(flash());//use before routes
 
-//using flash for create route
-app.use((req,res,next)=>{
-    res.locals.success=req.flash("success");
-    res.locals.error=req.flash("error");
-    next();
-});
-
 
 //Implementing passport for Authentication
 app.use(passport.initialize());
 app.use(passport.session());
 passport.use(new LocalStrategy(User.authenticate()));
+
+//using flash for create route
+app.use((req,res,next)=>{
+    res.locals.success=req.flash("success");
+    res.locals.error=req.flash("error");
+    res.locals.currUser=req.user;//locals are used to be accessed in ejs files
+    next();
+}); 
 
 // use static serialize(to serialize users into the session) and
 //  deserialize(to deserialize users into the session) of model for passport session support

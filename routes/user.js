@@ -34,7 +34,7 @@ router.post("/login",passport.authenticate('local',{failureRedirect:"/login" , f
 
 
 //implementing logout,logout() is builtin by passport
-router.get("/logout",(req,res,next)=>{
+router.post("/logout",(req,res,next)=>{
     req.logout((err)=>{
         if(err){
             next(err);

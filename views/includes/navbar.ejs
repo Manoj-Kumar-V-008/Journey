@@ -11,5 +11,26 @@
         <a class="nav-link" href="/listings/new.ejs">New Listings</a>
       </div>
     </div>
+    <div>
+      <ul class="navbar-nav ms-auto align-items-center">
+    <% if (currUser) { %>
+        <li class="nav-item">
+            <span class="nav-link welcome-text">Hi, <%= currUser.username %></span>
+        </li>
+        <li class="nav-item">
+            <form action="/logout" method="POST" class="d-inline">
+                <button type="submit" class="btn logout-btn">Log Out</button>
+            </form>
+        </li>
+    <% } else { %>
+        <li class="nav-item">
+            <a class="nav-link" href="/login">Login</a>
+        </li>
+        <li class="nav-item">
+            <a class="btn signup-nav-btn" href="/signup">Sign Up</a>
+        </li>
+    <% } %>
+</ul>
+    </div>
   </div>
 </nav>

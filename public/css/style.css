@@ -346,3 +346,37 @@ body{
 .login-link:hover {
     text-decoration: underline;
 }   
+
+.welcome-text {
+    color: #475569;
+    font-size: 1.2rem;
+}
+
+.logout-btn {
+    color: #F97316;
+    border: 2px solid #F97316;
+    border-radius: 0.5rem;
+    padding: 0.35rem 1rem;
+    font-size: 0.9rem;
+    background: transparent;
+}
+
+.logout-btn:hover {
+    background-color: #F97316;
+    color: #fff;
+}
+
+.signup-nav-btn {
+    background-color: #20D4FF;
+    color: #fff;
+    border-radius: 0.5rem;
+    padding: 0.35rem 1.1rem;
+    font-size: 0.9rem;
+    font-weight: 500;
+    text-decoration: none;
+}
+
+.signup-nav-btn:hover {
+    background-color: #1ab8e0;
+    color: #fff;
+}
