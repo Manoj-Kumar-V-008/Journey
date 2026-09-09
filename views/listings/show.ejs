@@ -8,6 +8,8 @@
                 <div class="card shadow-sm">
                     <img src="<%=listings.image.url%>" class="card-img-top" alt="<%=listings.title%>" style="height: 400px; object-fit: cover;">
                     <div class="card-body">
+                        <i><p>Owner : <%=listings.owner.username%></p></i>
+
                         <p class="card-text text-muted"><%=listings.description%></p>
 
                         <ul class="list-group list-group-flush mb-3">

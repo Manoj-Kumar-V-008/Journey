@@ -33,7 +33,11 @@ const listingSchema = new schema({
     reviews:[{
         type:schema.Types.ObjectID,
         ref:"Review"
-    }]
+    }],
+    owner: {
+        type: schema.Types.ObjectId,
+        ref: "User"
+    }
 });
 
 //as a middleware deletes all reviews when the main listing is deleted
