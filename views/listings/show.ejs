@@ -23,7 +23,7 @@
                                 <strong>Country:</strong> <%=listings.country%>
                             </li>
                         </ul>
-
+                    <% if(currUser && currUser._id.equals(listings.owner._id)) { %>
                         <div class="d-flex gap-2">
                             <a href="/listings/<%=listings._id%>/edit" class="btn btn-outline-warning upd-btn">Edit the Listing</a>
 
@@ -31,6 +31,7 @@
                                 <button type="submit" class="btn btn-danger">Delete this Listing</button>
                             </form>
                         </div>
+                    <%}%>
                     </div>
                 </div>
             </div>
