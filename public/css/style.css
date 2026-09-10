@@ -382,3 +382,16 @@ body{
     background-color: #1ab8e0;
     color: #fff;
 }
+
+.listing-cars{
+    transition: border-color 0.3s ease-in-out, box-shadow 2s ease-in-out;
+    margin-bottom: 2rem;
+    margin-left: 1.6rem;
+    margin-right: 1.7rem;
+}
+
+.listing-card:hover{
+    border-color: #007bff; 
+    box-shadow: 0 0 15px rgba(0, 123, 255, 0.4);
+    opacity: 0.85;
+}

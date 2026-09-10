@@ -1,3 +1,9 @@
+const wrapAsync = require("./utils/wrapAsync");
+const Listing = require("./models/listing.js");
+const ExpressError = require("./utils/ExpressError.js");
+const listingSchema = require("./schema.js");
+const {reviewSchema} = require("./schema.js");
+
 module.exports.isLoggedIn = (req,res,next)=>{
     // console.log(req.path,"--",req.originalUrl); -> stores the path we are trying to access , helps to redirect after login
     if(!req.isAuthenticated()){
@@ -15,3 +21,33 @@ module.exports.saveRedirectUrl = (req,res,next)=>{
     }
     next();
 }
+
+module.exports.isOwner = wrapAsync(async (req,res,next)=>{
+    let {id}=req.params;
+    let listing = await Listing.findById(id);
+    if(res.locals.currUser && !listing.owner.equals(res.locals.currUser._id)){
+        req.flash("error","You don't have permission to edit");
+        return res.redirect(`/listings/${id}`)
+    }
+    next();
+});
+
+module.exports.validateListing = (req,res,next)=>{
+    let {error} = listingSchema.validate(req.body);
+    if(error){
+        let errMsg = error.details.map((el)=>el.message).join(",");
+        throw new ExpressError(400,errMsg);
+    }else{
+        next();
+    }
+};
+
+module.exports.validateReview = (req,res,next)=>{
+    let {error} = reviewSchema.validate(req.body);
+    if(error){
+        let errMsg = error.details.map((el)=>el.message).join(",");
+        throw new ExpressError(400,errMsg);
+    }else{
+        next();
+    }
+};
