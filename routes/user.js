@@ -6,16 +6,15 @@ const { saveRedirectUrl } = require("../middleware.js");
 
 const userController = require("../controllers/users.js");
 
-router.get("/signup",userController.renderSignUp);
-
-router.post("/signup", wrapAsync(userController.signup));
-
-router.get("/login",wrapAsync(userController.renderLogin));
+router.route("/signup")
+.get(userController.renderSignUp)
+.post(wrapAsync(userController.signup));
 
 // passport is used as middleware for authentication during login
-router.post("/login",saveRedirectUrl,passport.authenticate('local',{failureRedirect:"/login" , failureFlash:true}),
+router.route("/login")
+.get(wrapAsync(userController.renderLogin))
+.post(saveRedirectUrl,passport.authenticate('local',{failureRedirect:"/login" , failureFlash:true}),
     wrapAsync(userController.login));
-
 
 //implementing logout,logout() is builtin by passport
 router.post("/logout",userController.logout);
