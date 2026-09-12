@@ -11,16 +11,9 @@ const listingSchema = new schema({
         type:String,
     },
     image:{
-    filename:{
-        type: String,
-        default: "listingimage",
+        url:String,
+        filename:String,
     },
-    url:{
-        type: String,
-        default: "https://placehold.net/main.svg", // a real fallback image
-        set: (v) => v === "" ? "https://placehold.net/main.svg" : v,
-    },
-},
     price:{
         type:Number,
     },

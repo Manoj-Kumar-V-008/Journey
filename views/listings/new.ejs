@@ -24,7 +24,8 @@
 
                         <div class="mb-3">
                             <label for="image" class="form-label fw-semibold">Upload Image</label>
-                            <input id="image" name="listing[image]" type="file" class="form-control">
+                            <input id="image" name="listing[image]" type="file" class="form-control" accept="image/png, image/jpeg, image/jpg"  required>
+                            <div class="invalid-feedback">Please choose an image to upload</div>
                         </div>
 
                         <div class="row">
