@@ -17,6 +17,12 @@
                         <div class="invalid-feedback">Please give a valid Description</div>
                     </div>
 
+                    
+                    <div class="mb-3">
+                        <label for="image" class="form-label">Current Image : </label>
+                        <div class="mb-2"><img src="<%=originalImgUrl%>" class="card-img-top" alt="<%=listing.title%>"></div>
+                    </div>
+
                     <div class="mb-3">
                         <label for="image" class="form-label">Update Image</label>
                         <input id="image" name="listing[image]" accept="image/png, image/jpeg, image/jpg" type="file" class="form-control" required>
