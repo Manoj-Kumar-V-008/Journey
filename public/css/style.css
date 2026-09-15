@@ -395,3 +395,9 @@ body{
     box-shadow: 0 0 15px rgba(0, 123, 255, 0.4);
     opacity: 0.85;
 }
+
+#map {
+    height: 400px;
+    width: 100%;
+    border-radius: 1rem;
+}
