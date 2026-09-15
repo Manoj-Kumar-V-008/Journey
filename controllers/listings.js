@@ -49,7 +49,7 @@ module.exports.createListing = async (req, res, next) => {
         type: "Point",
         coordinates: [geoCodeResult.lng, geoCodeResult.lat]
     };
-    
+
     await newListing.save();
 
     req.flash("success", "New Listing Created");
@@ -72,14 +72,31 @@ module.exports.renderEditForm = async (req, res) => {
 
 module.exports.updateListing = async (req, res) => {
     let { id } = req.params;
-    let listing = await Listing.findByIdAndUpdate(id, { ...req.body.listing });
+    let listing = await Listing.findById(id);
+
+    if (!listing) {
+        req.flash("error", "Listing doesn't Exist!");
+        return res.redirect("/listings");
+    }
+
+    listing.set(req.body.listing);
+
+    const { location, country } = req.body.listing;
+
+    const coordinates = await geocode(location, country);
+
+    listing.geometry = {
+        type: "Point",
+        coordinates: [coordinates.lng, coordinates.lat]
+    };
 
     if(typeof req.file !== "undefined"){
         let url = req.file.path;
         let filename = req.file.filename;
         listing.image = {url,filename};
-        await listing.save();
     }
+
+    await listing.save();
 
     req.flash("success", "Successfully Edited the listing");
     res.redirect("/listings");
