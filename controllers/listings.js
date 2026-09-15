@@ -79,16 +79,20 @@ module.exports.updateListing = async (req, res) => {
         return res.redirect("/listings");
     }
 
+    const locationChanged =listing.location !== req.body.listing.location || listing.country !== req.body.listing.country;
+
     listing.set(req.body.listing);
 
-    const { location, country } = req.body.listing;
+    if (locationChanged) {
+        const { location, country } = req.body.listing;
 
-    const coordinates = await geocode(location, country);
+        const coordinates = await geocode(location, country);
 
-    listing.geometry = {
-        type: "Point",
-        coordinates: [coordinates.lng, coordinates.lat]
-    };
+        listing.geometry = {
+            type: "Point",
+            coordinates: [coordinates.lng, coordinates.lat]
+        };
+    }
 
     if(typeof req.file !== "undefined"){
         let url = req.file.path;
