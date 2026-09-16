@@ -44,7 +44,20 @@ module.exports.createListing = async (req, res, next) => {
     newListing.image = { url, filename };
 
     const { location, country } = req.body.listing;
-    const geoCodeResult = await geocode(location, country);
+
+    let geoCodeResult;
+
+    try {
+        geoCodeResult = await geocode(location, country);
+    } catch (error) {
+        req.flash(
+            "error",
+            "We couldn't find this location. Please enter a valid place."
+        );
+
+        return res.redirect("/listings/new");
+    }
+
     newListing.geometry = {
         type: "Point",
         coordinates: [geoCodeResult.lng, geoCodeResult.lat]
@@ -59,15 +72,15 @@ module.exports.createListing = async (req, res, next) => {
 
 module.exports.renderEditForm = async (req, res) => {
     let { id } = req.params;
-    const listing = await Listing.findById(id); 
+    const listing = await Listing.findById(id);
     if (!listing) {
         req.flash("error", "Listing doesn't Exist!");
         return res.redirect("/listings");
     }
-    
+
     let originalImgUrl = listing.image.url;
-    originalImgUrl = originalImgUrl.replace("/upload/","/upload/c_fit,h_300,w_250/");
-    res.render("./listings/edit.ejs", { listing,originalImgUrl });
+    originalImgUrl = originalImgUrl.replace("/upload/", "/upload/c_fit,h_300,w_250/");
+    res.render("./listings/edit.ejs", { listing, originalImgUrl });
 };
 
 module.exports.updateListing = async (req, res) => {
@@ -79,25 +92,36 @@ module.exports.updateListing = async (req, res) => {
         return res.redirect("/listings");
     }
 
-    const locationChanged =listing.location !== req.body.listing.location || listing.country !== req.body.listing.country;
+    const locationChanged = listing.location !== req.body.listing.location || listing.country !== req.body.listing.country;
 
     listing.set(req.body.listing);
 
     if (locationChanged) {
-        const { location, country } = req.body.listing;
+    const { location, country } = req.body.listing;
 
-        const coordinates = await geocode(location, country);
+    let coordinates;
 
-        listing.geometry = {
-            type: "Point",
-            coordinates: [coordinates.lng, coordinates.lat]
-        };
+    try {
+        coordinates = await geocode(location, country);
+    } catch (error) {
+        req.flash(
+            "error",
+            "We couldn't find this location. Please enter a valid place."
+        );
+
+        return res.redirect(`/listings/${id}/edit`);
     }
 
-    if(typeof req.file !== "undefined"){
+    listing.geometry = {
+        type: "Point",
+        coordinates: [coordinates.lng, coordinates.lat]
+    };
+}
+
+    if (typeof req.file !== "undefined") {
         let url = req.file.path;
         let filename = req.file.filename;
-        listing.image = {url,filename};
+        listing.image = { url, filename };
     }
 
     await listing.save();
