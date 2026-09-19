@@ -135,4 +135,14 @@ module.exports.destroyListing = async (req, res) => {
     let deleteListing = await Listing.findByIdAndDelete(id);
     req.flash("success", "Deleted the Listing");
     res.redirect("/listings");
-}
+};
+
+module.exports.index = async (req, res) => {
+    const { category } = req.query;
+    let filter = {};
+    if (category && category !== "all") {
+        filter.category = category;
+    }
+    const allListings = await Listing.find(filter);
+    res.render("./listings/index.ejs", { allListings, activeCategory: category || "all" });
+};

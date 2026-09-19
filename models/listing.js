@@ -41,7 +41,12 @@ const listingSchema = new schema({
     owner: {
         type: schema.Types.ObjectId,
         ref: "User"
-    }
+    },
+    category: {
+    type: String,
+    enum: ["trending", "rooms", "iconic-cities", "mountains", "castles", "pools", "camping", "farms", "arctic"],
+}
+
 });
 
 //as a middleware deletes all reviews when the main listing is deleted

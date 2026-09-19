@@ -26,3 +26,26 @@
           bootstrap.Alert.getOrCreateInstance(flashToast).close();
       }, 4000);
   }
+
+  const filters = document.querySelectorAll("#filters .filter");
+const listingItems = document.querySelectorAll(".listing-item");
+
+filters.forEach(filter => {
+    filter.addEventListener("click", () => {
+        // 1. Update active state
+        filters.forEach(f => f.classList.remove("active"));
+        filter.classList.add("active");
+
+        const selectedCategory = filter.getAttribute("data-category");
+
+        // 2. Filter listings
+        listingItems.forEach(item => {
+            const itemCategory = item.getAttribute("data-category");
+            if (selectedCategory === "all" || itemCategory === selectedCategory) {
+                item.style.display = "block";
+            } else {
+                item.style.display = "none";
+            }
+        });
+    });
+});

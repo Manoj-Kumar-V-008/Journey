@@ -401,3 +401,53 @@ body{
     width: 100%;
     border-radius: 1rem;
 }
+/* Filters Container */
+#filters {
+    display: flex;
+    align-items: center;
+    gap: 3rem;
+    overflow-x: auto;
+    padding: 0.5rem 0 1rem 0;
+    margin-bottom: 1.5rem;
+    scrollbar-width: none; /* Firefox */
+}
+
+#filters::-webkit-scrollbar {
+    display: none; /* Chrome, Safari, Edge */
+}
+
+/* Individual Filter Item */
+.filter {
+    text-align: center;
+    opacity: 0.65;
+    cursor: pointer;
+    flex-shrink: 0;
+    transition: all 0.2s ease-in-out;
+    padding-bottom: 0.25rem;
+    border-bottom: 2px solid transparent;
+}
+
+.filter i {
+    font-size: 1.5rem;
+    margin-bottom: 0.35rem;
+}
+
+.filter p {
+    font-size: 1rem;
+    font-weight: 500;
+    margin: 0;
+}
+
+/* Hover & Active States */
+.filter:hover {
+    opacity: 1;
+    color: #F97316; /* Journey Orange */
+    transform: translateY(-2px);
+}
+
+.filter.active {
+    opacity: 1;
+    color: #0F172A;
+    border-bottom: 2px solid #F97316;
+    font-weight: 600;
+}
