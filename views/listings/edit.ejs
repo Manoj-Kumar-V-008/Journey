@@ -29,6 +29,20 @@
                         <div class="invalid-feedback">Please choose an image to upload</div>
                     </div>
 
+                <div>
+                    <select name="listing[category]" id="category" class="form-select" required>
+                        <option value="trending" <%= listing.category === "trending" ? "selected" : "" %>>Trending</option>
+                        <option value="rooms" <%= listing.category === "rooms" ? "selected" : "" %>>Rooms</option>
+                        <option value="iconic-cities" <%= listing.category === "iconic-cities" ? "selected" : "" %>>Iconic Cities</option>
+                        <option value="mountains" <%= listing.category === "mountains" ? "selected" : "" %>>Mountains</option>
+                        <option value="castles" <%= listing.category === "castles" ? "selected" : "" %>>Castles</option>
+                        <option value="pools" <%= listing.category === "pools" ? "selected" : "" %>>Amazing Pools</option>
+                        <option value="camping" <%= listing.category === "camping" ? "selected" : "" %>>Camping</option>
+                        <option value="farms" <%= listing.category === "farms" ? "selected" : "" %>>Farms</option>
+                        <option value="arctic" <%= listing.category === "arctic" ? "selected" : "" %>>Arctic</option>
+                    </select>
+                </div>
+
                     <div class="row">
                         <div class="col-md-4 mb-3">
                             <label for="price" class="form-label">Price</label>

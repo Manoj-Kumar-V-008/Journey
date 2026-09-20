@@ -2,8 +2,16 @@ const Listing = require("../models/listing.js");
 const geocode = require("../utils/geocode.js");
 
 module.exports.index = async (req, res) => {
-    const allListings = await (Listing.find({}));
-    res.render("./listings/index.ejs", { allListings });
+    const {category} = req.query ;
+    let allListings;
+
+    if (category && category !== "all") {
+    allListings = await Listing.find({ category });
+  } else {
+    allListings = await Listing.find({});
+  }
+    
+    res.render("listings/index.ejs", { allListings, activeCategory: category || "all" });
 }
 
 module.exports.renderNewForm = (req, res) => {

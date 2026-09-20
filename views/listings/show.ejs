@@ -34,6 +34,10 @@
                                     <strong>Country:</strong>
                                     <%=listings.country%>
                                 </li>
+                                <li class="list-group-item">
+                                    <strong>Category:</strong>
+                                    <%=listings.category%>
+                                </li>
                             </ul>
                             <% if(currUser && currUser._id.equals(listings.owner._id)) { %>
                                 <div class="d-flex gap-2">
