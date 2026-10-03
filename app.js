@@ -29,7 +29,7 @@ app.use(methodOverride("_method"));
 app.use(express.static(path.join(__dirname, "/public")));
 
 const sessionOption = {
-    secret: "thisisaSecretCode",
+    secret:process.env.SECRET,
     resave: false,
     saveUninitialized: true,
     cookie: {
