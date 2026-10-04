@@ -9,6 +9,7 @@ const methodOverride = require("method-override")
 const ejsMate = require("ejs-mate");
 const ExpressError = require("./utils/ExpressError.js");
 const session = require("express-session");
+const MongoStore = require("connect-mongo").default;
 const flash = require("connect-flash");
 const passport = require("passport");
 const LocalStrategy = require("passport-local");
@@ -28,8 +29,29 @@ app.use(express.urlencoded({ extended: true }));
 app.use(methodOverride("_method"));
 app.use(express.static(path.join(__dirname, "/public")));
 
+
+const dbUrl = process.env.ATLAS_DB_URL;
+const secret = process.env.SECRET;
+
+if (!dbUrl || !secret) {
+    console.error("FATAL: ATLAS_DB_URL and SECRET env vars are required. Set them in Render Dashboard > Environment.");
+}
+
+const store = MongoStore.create({
+    mongoUrl: dbUrl,
+    crypto: {
+        secret: secret || "fallback-dev-secret-only",
+    },
+    touchAfter: 24 * 3600
+});
+
+store.on("error", (err) => {
+    console.log("Error in Mongo Session Store", err);
+})
+
 const sessionOption = {
-    secret:process.env.SECRET,
+    store: store,
+    secret: secret || "fallback-dev-secret-only",
     resave: false,
     saveUninitialized: true,
     cookie: {
@@ -38,6 +60,7 @@ const sessionOption = {
         httpOnly: true
     }
 };
+
 
 app.use(session(sessionOption));
 app.use(flash());//use before routes
@@ -77,7 +100,7 @@ app.get("/", (req, res) => {
 
 async function main() {
     await mongoose.connect(
-        "mongodb://127.0.0.1:27017/journey"
+        dbUrl
     );
 }
 
@@ -104,12 +127,13 @@ app.all("/*splat", (req, res, next) => {
 
 app.use((err, req, res, next) => {
     let { statusCode = 500, message = "Something went wrong" } = err;
-    res.render("error.ejs", { message });
+    res.status(statusCode).render("error.ejs", { message });
     // res.status(statusCode).send(message);
 });
 
-app.listen(8080, () => {
-    console.log("App is listening at port 8080");
+const port = process.env.PORT || 8080;
+app.listen(port, () => {
+    console.log(`App is listening at port ${port}`);
 });
 
 
